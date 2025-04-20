@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCOMO 81 Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">COCOMO 81</div>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active" data-section="inicio">Inicio</a></li>
+                <li><a href="#documentacion" data-section="documentacion">Documentación</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="inicio" class="section active">
+            <header>
+                <h1>COCOMO 81 Calculator</h1>
+                <p>Modelo Intermedio para estimación de proyectos de software</p>
+            </header>
+
+            <main>
+                <section id="input-section">
+                    <h2>Parámetros del Proyecto</h2>
+                    <form id="cocomo-form">
+                        <div class="form-group">
+                            <label for="kloc">Tamaño del proyecto (KLOC):</label>
+                            <input type="number" id="kloc" min="1" step="0.1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mode">Modo de desarrollo:</label>
+                            <select id="mode" required>
+                                <option value="organic">Orgánico</option>
+                                <option value="semi-detached">Semilibre</option>
+                                <option value="embedded">Rígido</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salary">Sueldo mensual promedio (USD):</label>
+                            <input type="number" id="salary" min="0" step="100" value="3000">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Opciones de cálculo:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="calc-team" name="calc-option" value="team" checked>
+                                <label for="calc-team">Calcular duración (ingrese número de programadores)</label>
+                                <input type="number" id="team-size" min="1" value="4">
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="calc-duration" name="calc-option" value="duration">
+                                <label for="calc-duration">Calcular equipo necesario (ingrese duración deseada en meses)</label>
+                                <input type="number" id="desired-duration" min="1" value="12" disabled>
+                            </div>
+                        </div>
+
+                        <h3>Atributos de Coste</h3>
+                        <div id="cost-drivers">
+                        </div>
+
+                        <button type="submit">Calcular</button>
+                    </form>
+                </section>
+
+                <section id="results-section" class="hidden">
+                    <h2>Resultados de la Estimación</h2>
+                    <div id="results-container">
+
+                    </div>
+                    <button id="back-btn">Volver</button>
+                </section>
+            </main>
+        </div>
+
+        <div id="documentacion" class="section">
+            <header>
+                <h1>Documentación COCOMO 81</h1>
+                <p>Guía completa del modelo de estimación</p>
+            </header>
+
+            <main class="documentation-content">
+                <section class="doc-section">
+                    <h2>¿Qué es COCOMO 81?</h2>
+                    <p>COCOMO (Constructive Cost Model) es un modelo de estimación de costos de software desarrollado por Barry Boehm en 1981. El modelo intermedio COCOMO 81 es una versión más detallada que considera múltiples factores que afectan el desarrollo del software.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2>Modos de Desarrollo</h2>
+                    <div class="mode-card">
+                        <h3>Orgánico</h3>
+                        <p>Proyectos pequeños y simples, desarrollados por equipos pequeños con experiencia en la aplicación.</p>
+                        <ul>
+                            <li>Equipo pequeño y experimentado</li>
+                            <li>Requisitos flexibles</li>
+                            <li>Interfaz de usuario simple</li>
+                        </ul>
+                    </div>
+                    <div class="mode-card">
+                        <h3>Semilibre</h3>
+                        <p>Proyectos de tamaño medio, con mezcla de requisitos rígidos y flexibles.</p>
+                        <ul>
+                            <li>Equipo mixto con experiencia variada</li>
+                            <li>Requisitos parcialmente definidos</li>
+                            <li>Interfaz de usuario moderada</li>
+                        </ul>
+                    </div>
+                    <div class="mode-card">
+                        <h3>Rígido</h3>
+                        <p>Proyectos grandes y complejos con requisitos estrictos.</p>
+                        <ul>
+                            <li>Equipo grande y diverso</li>
+                            <li>Requisitos muy definidos</li>
+                            <li>Interfaz de usuario compleja</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="doc-section">
+                    <h2>Atributos de Coste</h2>
+                    <p>Los atributos de coste son factores que afectan el esfuerzo del proyecto. Se dividen en cuatro categorías:</p>
+                    
+                    <div class="cost-category">
+                        <h3>Atributos del Producto</h3>
+                        <ul>
+                            <li>Fiabilidad requerida del software (RELY)</li>
+                            <li>Tamaño de la base de datos (DATA)</li>
+                            <li>Complejidad del producto (CPLX)</li>
+                            <li>Restricciones del tiempo de ejecución (TIME)</li>
+                            <li>Restricciones del almacenamiento (STOR)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cost-category">
+                        <h3>Atributos del Hardware</h3>
+                        <ul>
+                            <li>Inestabilidad de la máquina virtual (VIRT)</li>
+                            <li>Tiempo de respuesta del computador (TURN)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cost-category">
+                        <h3>Atributos del Personal</h3>
+                        <ul>
+                            <li>Capacidad del analista (ACAP)</li>
+                            <li>Experiencia en la aplicación (AEXP)</li>
+                            <li>Capacidad de los programadores (PCAP)</li>
+                            <li>Experiencia en S.O. utilizado (VEXP)</li>
+                            <li>Experiencia en el lenguaje de programación (LEXP)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cost-category">
+                        <h3>Atributos del Proyecto</h3>
+                        <ul>
+                            <li>Uso de prácticas de programación modernas (MODP)</li>
+                            <li>Uso de herramientas software (TOOL)</li>
+                            <li>Restricciones en la duración del proyecto (SCED)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="doc-section">
+                    <h2>Fórmulas Principales</h2>
+                    <div class="formula-card">
+                        <h3>Esfuerzo (E)</h3>
+                        <p>E = a × (KLOC)^b × EAF</p>
+                        <p>Donde:</p>
+                        <ul>
+                            <li>a, b: Constantes que dependen del modo de desarrollo</li>
+                            <li>KLOC: Miles de líneas de código</li>
+                            <li>EAF: Factor de ajuste de esfuerzo (producto de los multiplicadores)</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula-card">
+                        <h3>Duración (D)</h3>
+                        <p>D = c × (E)^d</p>
+                        <p>Donde:</p>
+                        <ul>
+                            <li>c, d: Constantes que dependen del modo de desarrollo</li>
+                            <li>E: Esfuerzo calculado</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+    </div>
+    <footer>
+        <p>© 2025 COCOMO 81 Calculator - Modelo Intermedio</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
